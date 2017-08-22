@@ -1,7 +1,5 @@
 /**
- * Created by kmcfadden on 8/21/17.
+ * Created by kmcfadden on 8/22/17.
  */
-public class HtmlParser {
-
-
+public abstract class HtmlParser implements Runnable {
 }
