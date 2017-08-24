@@ -4,9 +4,8 @@
 public class GoogleFinanceHtmlParser extends HtmlParser {
 
     private static final String NO_MATCHES = "produced no matches";
-    private boolean isValid = true;
 
-    private String html;
+    private boolean isValid = true;
 
     private String tickerSymbol;
     private double price;
@@ -18,14 +17,10 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
     private char capMagnitude;
 
     public GoogleFinanceHtmlParser(String html, String tickerSymbol) {
-        this.html = html;
         this.tickerSymbol = tickerSymbol;
-    }
-
-    public void run() {
 
         // determine if html is bad
-        if (html.contains(NO_MATCHES) || html == null) {
+        if (html == null || html.contains(NO_MATCHES)) {
             isValid = false;
             return;
         } else {
@@ -37,12 +32,12 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
         while (true) {
 
             // get the key and value
-            index = findIndex(index, "key");
-            String key = getStringAtIndex(index);
+            index = findIndex(index, html, "key");
+            String key = getStringAtIndex(index, html);
             if (key == null) { break; }
 
-            index = findIndex(index, "val");
-            String val = getStringAtIndex(index);
+            index = findIndex(index, html, "val");
+            String val = getStringAtIndex(index, html);
             if (val == null) { continue; }
 
             // determine what to do based on what the key is
@@ -54,14 +49,18 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
                                   cap = Double.parseDouble(val.substring(0, val.length() - 1));
                                   continue;
 
-                case "P/E":       pe = Double.parseDouble(val);
+                case "P/E":       if (StringUtils.isFloatingPoint(val)) {
+                                      pe = Double.parseDouble(val);
+                                  }
                                   continue;
 
                 case "Div/yield": div = Double.parseDouble(val.split("/")[0]);
                                   yield = Double.parseDouble(val.split("/")[1]);
                                   continue;
 
-                case "EPS":       eps = Double.parseDouble(val);
+                case "EPS":       if (StringUtils.isFloatingPoint(val)) {
+                                      eps = Double.parseDouble(val);
+                                  }
                                   continue;
 
                 default:          break;
@@ -70,7 +69,7 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
     }
 
     // returns -1 if no more occurrences of index to search for
-    private int findIndex(int index, String query) {
+    private int findIndex(int index, String html, String query) {
         index = html.indexOf("<td class=\"" + query + "\"", index);
         if (index == -1) { return -1; }
         index = html.indexOf(">", index);
@@ -78,7 +77,7 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
     }
 
     // returns null if it receives -1 as an index
-    private String getStringAtIndex(int index) {
+    private String getStringAtIndex(int index, String html) {
 
         if (index == -1)
             return null;
@@ -102,6 +101,14 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
         return isValid;
     }
 
+    public double getYield() {
+        return yield;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
     public String[] getData() {
         String[] data = { tickerSymbol, Double.toString(price), Double.toString(div), Double.toString(yield),
                 Double.toString(pe), Double.toString(eps), Double.toString(cap) + capMagnitude };
@@ -116,7 +123,6 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
     // Testing
     public static void main(String[] args) {
         GoogleFinanceHtmlParser parser = new GoogleFinanceHtmlParser(HtmlScraper.getHtml("https://www.google.com/finance?q=NYSE:VZ"), "VZ");
-        parser.run();
 
         if (parser.isValid) {
             String[] header = GoogleFinanceHtmlParser.getHeader();

@@ -55,7 +55,6 @@ public class GoogleFinanceCrawler extends Crawler {
                             synchronized (parsers) {
                                 parsers.add(parser);
                             }
-                            parser.run();
                         }));
                         // ToDo: get results
                     }
