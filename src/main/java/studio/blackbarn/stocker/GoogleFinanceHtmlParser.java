@@ -1,3 +1,5 @@
+package studio.blackbarn.stocker;
+
 /**
  * Created by kmcfadden on 8/21/17.
  */
