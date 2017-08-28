@@ -1,9 +1,13 @@
 /Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/StockerApplication.java
+/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/FundamentalsRepository.java
 /Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/HoldingsReader.java
-/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/PortfolioAnalyzer.java
+/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/ValidStockRepository.java
 /Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/HtmlParser.java
-/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/Crawler.java
 /Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/GoogleFinanceCrawler.java
+/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/GoogleFinanceHtmlParser.java
+/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/FundamentalsPO.java
+/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/PortfolioAnalyzer.java
+/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/ValidStockPO.java
+/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/Crawler.java
 /Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/HoldingsWriter.java
 /Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/Urls.java
-/Users/kmcfadden/Desktop/projects/Stocker/src/main/java/studio/blackbarn/stocker/GoogleFinanceHtmlParser.java

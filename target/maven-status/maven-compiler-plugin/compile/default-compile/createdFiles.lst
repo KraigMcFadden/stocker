@@ -1,9 +1,13 @@
+studio/blackbarn/stocker/HoldingsReader.class
+studio/blackbarn/stocker/Crawler.class
+studio/blackbarn/stocker/FundamentalsRepository.class
+studio/blackbarn/stocker/HtmlParser.class
+studio/blackbarn/stocker/ValidStockPO.class
+studio/blackbarn/stocker/FundamentalsPO.class
+studio/blackbarn/stocker/GoogleFinanceHtmlParser.class
 studio/blackbarn/stocker/GoogleFinanceCrawler.class
 studio/blackbarn/stocker/Urls.class
-studio/blackbarn/stocker/HoldingsReader.class
 studio/blackbarn/stocker/PortfolioAnalyzer.class
-studio/blackbarn/stocker/Crawler.class
 studio/blackbarn/stocker/HoldingsWriter.class
-studio/blackbarn/stocker/HtmlParser.class
+studio/blackbarn/stocker/ValidStockRepository.class
 studio/blackbarn/stocker/StockerApplication.class
-studio/blackbarn/stocker/GoogleFinanceHtmlParser.class
