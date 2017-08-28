@@ -1,5 +1,7 @@
 package studio.blackbarn.stocker;
 
+import studio.blackbarn.utils.HtmlScraper;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;

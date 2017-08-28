@@ -1,5 +1,7 @@
 package studio.blackbarn.stocker;
 
+import studio.blackbarn.utils.CsvWriter;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 

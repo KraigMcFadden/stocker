@@ -1,5 +1,8 @@
 package studio.blackbarn.stocker;
 
+import studio.blackbarn.utils.StringUtils;
+import studio.blackbarn.utils.HtmlScraper;
+
 /**
  * Created by kmcfadden on 8/21/17.
  */

@@ -1,5 +1,8 @@
 package studio.blackbarn.stocker;
 
+import studio.blackbarn.utils.ThreadManager;
+import studio.blackbarn.utils.HtmlScraper;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: studio.blackbarn.stocker.StockerApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.762 sec - in studio.blackbarn.stocker.StockerApplicationTests
