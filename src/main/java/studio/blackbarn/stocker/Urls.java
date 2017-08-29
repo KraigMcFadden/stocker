@@ -4,7 +4,8 @@ package studio.blackbarn.stocker;
  * Created by kmcfadden on 8/25/17.
  */
 public enum Urls {
-    gf("https://www.google.com/finance?q=NYSE:");
+    GF_NYSE("https://www.google.com/finance?q=NYSE:"),      // use these to crawl Google Finance for valid stocks
+    GF_NASDAQ("https://www.google.com/finance?q=NASDAQ:");
 
     private String url;
 

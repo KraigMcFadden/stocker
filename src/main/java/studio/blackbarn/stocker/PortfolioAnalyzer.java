@@ -2,8 +2,6 @@ package studio.blackbarn.stocker;
 
 import studio.blackbarn.utils.HtmlScraper;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +36,7 @@ public class PortfolioAnalyzer {
         // gather data
         for (String stockTicker : holdings.keySet()) {
 
-            GoogleFinanceHtmlParser parser = new GoogleFinanceHtmlParser(HtmlScraper.getHtml(Urls.gf.getUrl() + stockTicker), stockTicker);
+            GoogleFinanceHtmlParser parser = new GoogleFinanceHtmlParser(HtmlScraper.getHtml(Urls.GF_NYSE.getUrl() + stockTicker), stockTicker);
             if (parser.isValid()) {
                 double weight = holdings.get(stockTicker) * parser.getPrice();
                 portfolioYield += parser.getYield() * weight;

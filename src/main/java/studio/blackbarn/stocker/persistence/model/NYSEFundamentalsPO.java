@@ -1,32 +1,33 @@
-package studio.blackbarn.stocker;
+package studio.blackbarn.stocker.persistence.model;
 
 import javax.persistence.*;
 
 /**
- * Created by kmcfadden on 8/28/17.
+ * Created by kmcfadden on 8/29/17.
  */
 
 @Entity
-@Table(name = "fundamentals")
-public class FundamentalsPO {
+@Table(name = "nyse_fundamentals")
+public class NYSEFundamentalsPO {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+
     private String tickerSymbol;
     private double price;
-    private Double div;
+    private Double dividend;
     private Double yield;
     private Double pe;
     private Double eps;
     private String cap;
 
-    public FundamentalsPO() {}
+    public NYSEFundamentalsPO() {}
 
-    public FundamentalsPO(String tickerSymbol, double price, Double div, Double yield, Double pe, Double eps, String cap) {
+    public NYSEFundamentalsPO(String tickerSymbol, double price, Double dividend, Double yield, Double pe, Double eps, String cap) {
         this.tickerSymbol = tickerSymbol;
         this.price = price;
-        this.div = div;
+        this.dividend = dividend;
         this.yield = yield;
         this.pe = pe;
         this.eps = eps;
@@ -57,12 +58,12 @@ public class FundamentalsPO {
         this.price = price;
     }
 
-    public Double getDiv() {
-        return div;
+    public Double getDividend() {
+        return dividend;
     }
 
-    public void setDiv(Double div) {
-        this.div = div;
+    public void setDividend(Double dividend) {
+        this.dividend = dividend;
     }
 
     public Double getYield() {

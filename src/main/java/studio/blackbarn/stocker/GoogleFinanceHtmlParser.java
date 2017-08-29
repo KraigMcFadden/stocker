@@ -14,7 +14,7 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
 
     private String tickerSymbol;
     private double price;
-    private Double div;
+    private Double dividend;
     private Double yield;
     private Double pe;
     private Double eps;
@@ -62,7 +62,7 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
                 case "Div/yield": if (val.contains("/")) {
                                      String[] temp = val.split("/");
                                      if (StringUtils.isFloatingPoint(temp[0]))
-                                         div = Double.parseDouble(temp[0]);
+                                         dividend = Double.parseDouble(temp[0]);
                                      if (StringUtils.isFloatingPoint(temp[1]))
                                          yield = Double.parseDouble(temp[1]);
                                   }
@@ -119,8 +119,8 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
         return price;
     }
 
-    public Double getDiv() {
-        return div;
+    public Double getDividend() {
+        return dividend;
     }
 
     public Double getYield() {
@@ -140,7 +140,7 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
     }
 
     public String[] getData() {
-        String tempDiv = (div != null) ? Double.toString(div) : null;
+        String tempDiv = (dividend != null) ? Double.toString(dividend) : null;
         String tempYield = (yield != null) ? Double.toString(yield) : null;
         String tempPe = (pe != null) ? Double.toString(pe) : null;
         String tempEps = (eps != null) ? Double.toString(eps) : null;
@@ -149,7 +149,7 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
     }
 
     public static String[] getHeader() {
-        String[] header = { "Symbol", "Price", "Div", "Yield", "P/E", "EPS", "Mkt Cap" };
+        String[] header = { "Symbol", "Price", "Dividend", "Yield", "P/E", "EPS", "Mkt Cap" };
         return header;
     }
 
