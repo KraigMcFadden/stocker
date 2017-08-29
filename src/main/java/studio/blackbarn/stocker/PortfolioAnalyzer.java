@@ -84,9 +84,10 @@ public class PortfolioAnalyzer {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-        Path filePath = Paths.get(System.getProperty("user.home"), "Documents", "E_holdings.txt");
-        PortfolioAnalyzer analyzer = new PortfolioAnalyzer(filePath.toString());
-        System.out.println(analyzer.toString());
-    }
+    // Analyze holdings
+//    public static void main(String[] args) {
+//        Path filePath = Paths.get(System.getProperty("user.home"), "Documents", "E_holdings.txt");
+//        PortfolioAnalyzer analyzer = new PortfolioAnalyzer(filePath.toString());
+//        System.out.println(analyzer.toString());
+//    }
 }

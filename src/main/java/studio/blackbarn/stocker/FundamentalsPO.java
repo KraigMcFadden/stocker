@@ -13,16 +13,18 @@ public class FundamentalsPO {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+    private String tickerSymbol;
     private double price;
-    private double div;
-    private double yield;
-    private double pe;
-    private double eps;
-    private double cap;
+    private Double div;
+    private Double yield;
+    private Double pe;
+    private Double eps;
+    private String cap;
 
     public FundamentalsPO() {}
 
-    public FundamentalsPO(double price, double div, double yield, double pe, double eps, double cap) {
+    public FundamentalsPO(String tickerSymbol, double price, Double div, Double yield, Double pe, Double eps, String cap) {
+        this.tickerSymbol = tickerSymbol;
         this.price = price;
         this.div = div;
         this.yield = yield;
@@ -39,6 +41,14 @@ public class FundamentalsPO {
         this.id = id;
     }
 
+    public String getTickerSymbol() {
+        return tickerSymbol;
+    }
+
+    public void setTickerSymbol(String tickerSymbol) {
+        this.tickerSymbol = tickerSymbol;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -47,43 +57,43 @@ public class FundamentalsPO {
         this.price = price;
     }
 
-    public double getDiv() {
+    public Double getDiv() {
         return div;
     }
 
-    public void setDiv(double div) {
+    public void setDiv(Double div) {
         this.div = div;
     }
 
-    public double getYield() {
+    public Double getYield() {
         return yield;
     }
 
-    public void setYield(double yield) {
+    public void setYield(Double yield) {
         this.yield = yield;
     }
 
-    public double getPe() {
+    public Double getPe() {
         return pe;
     }
 
-    public void setPe(double pe) {
+    public void setPe(Double pe) {
         this.pe = pe;
     }
 
-    public double getEps() {
+    public Double getEps() {
         return eps;
     }
 
-    public void setEps(double eps) {
+    public void setEps(Double eps) {
         this.eps = eps;
     }
 
-    public double getCap() {
+    public String getCap() {
         return cap;
     }
 
-    public void setCap(double cap) {
+    public void setCap(String cap) {
         this.cap = cap;
     }
 }

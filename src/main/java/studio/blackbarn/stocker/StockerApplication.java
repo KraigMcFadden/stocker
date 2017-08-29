@@ -14,8 +14,9 @@ public class StockerApplication {
 		SpringApplication.run(StockerApplication.class, args);
 	}
 
-	@Bean
-	public DataSource readWriteDataSource() {
-		return new DriverManagerDataSource("http://stocker.cr9thz7p6eak.us-east-1.rds.amazonaws.com:3306", "kwm1218x", "Kwm658!!");
-	}
+//	@Bean
+//	public DataSource readWriteDataSource() {
+//		return new DriverManagerDataSource("jdbc:mysql://stocker.cr9thz7p6eak.us-east-1.rds.amazonaws.com:3306/stocker",
+//				"kwm1218x", "Kwm658!!");
+//	}
 }

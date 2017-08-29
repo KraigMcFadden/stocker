@@ -14,12 +14,11 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
 
     private String tickerSymbol;
     private double price;
-    private double div;
-    private double yield;
-    private double pe;
-    private double eps;
-    private double cap;
-    private char capMagnitude;
+    private Double div;
+    private Double yield;
+    private Double pe;
+    private Double eps;
+    private String cap;
 
     public GoogleFinanceHtmlParser(String html, String tickerSymbol) {
         this.tickerSymbol = tickerSymbol;
@@ -47,11 +46,12 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
 
             // determine what to do based on what the key is
             switch (key) {
-                case "Open":      price = Double.parseDouble(val);
+                case "Open":      if (StringUtils.isFloatingPoint(val)) {
+                                      price = Double.parseDouble(val);
+                                  }
                                   continue;
 
-                case "Mkt cap":   capMagnitude = val.charAt(val.length() - 1);
-                                  cap = Double.parseDouble(val.substring(0, val.length() - 1));
+                case "Mkt cap":   cap = val;
                                   continue;
 
                 case "P/E":       if (StringUtils.isFloatingPoint(val)) {
@@ -59,8 +59,13 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
                                   }
                                   continue;
 
-                case "Div/yield": div = Double.parseDouble(val.split("/")[0]);
-                                  yield = Double.parseDouble(val.split("/")[1]);
+                case "Div/yield": if (val.contains("/")) {
+                                     String[] temp = val.split("/");
+                                     if (StringUtils.isFloatingPoint(temp[0]))
+                                         div = Double.parseDouble(temp[0]);
+                                     if (StringUtils.isFloatingPoint(temp[1]))
+                                         yield = Double.parseDouble(temp[1]);
+                                  }
                                   continue;
 
                 case "EPS":       if (StringUtils.isFloatingPoint(val)) {
@@ -106,17 +111,40 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
         return isValid;
     }
 
-    public double getYield() {
-        return yield;
+    public String getTickerSymbol() {
+        return tickerSymbol;
     }
 
     public double getPrice() {
         return price;
     }
 
+    public Double getDiv() {
+        return div;
+    }
+
+    public Double getYield() {
+        return yield;
+    }
+
+    public Double getPe() {
+        return pe;
+    }
+
+    public Double getEps() {
+        return eps;
+    }
+
+    public String getCap() {
+        return cap;
+    }
+
     public String[] getData() {
-        String[] data = { tickerSymbol, Double.toString(price), Double.toString(div), Double.toString(yield),
-                Double.toString(pe), Double.toString(eps), Double.toString(cap) + capMagnitude };
+        String tempDiv = (div != null) ? Double.toString(div) : null;
+        String tempYield = (yield != null) ? Double.toString(yield) : null;
+        String tempPe = (pe != null) ? Double.toString(pe) : null;
+        String tempEps = (eps != null) ? Double.toString(eps) : null;
+        String[] data = { tickerSymbol, Double.toString(price), tempDiv, tempYield, tempPe, tempEps, cap };
         return data;
     }
 
@@ -126,17 +154,17 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
     }
 
     // Testing
-    public static void main(String[] args) {
-        GoogleFinanceHtmlParser parser = new GoogleFinanceHtmlParser(HtmlScraper.getHtml("https://www.google.com/finance?q=NYSE:VZ"), "VZ");
-
-        if (parser.isValid) {
-            String[] header = GoogleFinanceHtmlParser.getHeader();
-            for (int i = 0; i < header.length; i++)
-                System.out.print(header[i] + "   ");
-            System.out.println('\n');
-            String[] data = parser.getData();
-            for (int i = 0; i < data.length; i++)
-                System.out.print(data[i] + "   ");
-        }
-    }
+//    public static void main(String[] args) {
+//        GoogleFinanceHtmlParser parser = new GoogleFinanceHtmlParser(HtmlScraper.getHtml("https://www.google.com/finance?q=NYSE:ABCD"), "VZ");
+//
+//        if (parser.isValid) {
+//            String[] header = GoogleFinanceHtmlParser.getHeader();
+//            for (int i = 0; i < header.length; i++)
+//                System.out.print(header[i] + "   ");
+//            System.out.println('\n');
+//            String[] data = parser.getData();
+//            for (int i = 0; i < data.length; i++)
+//                System.out.print(data[i] + "   ");
+//        }
+//    }
 }
