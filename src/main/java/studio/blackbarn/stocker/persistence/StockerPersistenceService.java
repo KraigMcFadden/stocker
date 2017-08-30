@@ -3,8 +3,10 @@ package studio.blackbarn.stocker.persistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import studio.blackbarn.stocker.StockExchange;
+import studio.blackbarn.stocker.persistence.model.FundamentalsPO;
 import studio.blackbarn.stocker.persistence.model.NASDAQFundamentalsPO;
 import studio.blackbarn.stocker.persistence.model.NYSEFundamentalsPO;
+import studio.blackbarn.stocker.persistence.repository.FundamentalsRepository;
 import studio.blackbarn.stocker.persistence.repository.NASDAQFundamentalsRepository;
 import studio.blackbarn.stocker.persistence.repository.NYSEFundamentalsRepository;
 
@@ -13,11 +15,14 @@ public class StockerPersistenceService {
 
     private NYSEFundamentalsRepository nyseFundamentals;
     private NASDAQFundamentalsRepository nasdaqFundamentals;
+    private FundamentalsRepository fundamentals;
 
     @Autowired
-    public StockerPersistenceService(NYSEFundamentalsRepository nyseFundamentals, NASDAQFundamentalsRepository nasdaqFundamentals) {
+    public StockerPersistenceService(NYSEFundamentalsRepository nyseFundamentals, NASDAQFundamentalsRepository nasdaqFundamentals,
+                                     FundamentalsRepository fundamentals) {
         this.nyseFundamentals = nyseFundamentals;
         this.nasdaqFundamentals = nasdaqFundamentals;
+        this.fundamentals = fundamentals;
     }
 
     public void saveStockFundamentals(StockExchange exchange, String tickerSymbol, double price, Double dividend,
@@ -56,5 +61,10 @@ public class StockerPersistenceService {
             nyseFundamentals.save(po);
 
         }
+    }
+
+    // hacky method to move data from two crap tables to one consolidated table - delete once done
+    public void swapToNewTable() {
+
     }
 }
