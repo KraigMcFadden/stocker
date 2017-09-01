@@ -12,9 +12,6 @@ import javax.persistence.*;
 public class FundamentalsPO {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
-
     private String tickerSymbol;
     private double price;
     private Double dividend;
@@ -36,14 +33,6 @@ public class FundamentalsPO {
         this.eps = eps;
         this.cap = cap;
         this.exchange = exchange.name();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTickerSymbol() {
@@ -106,7 +95,7 @@ public class FundamentalsPO {
         return exchange;
     }
 
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
+    public void setExchange(StockExchange exchange) {
+        this.exchange = exchange.name();
     }
 }

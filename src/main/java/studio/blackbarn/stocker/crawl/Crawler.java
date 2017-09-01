@@ -1,4 +1,4 @@
-package studio.blackbarn.stocker;
+package studio.blackbarn.stocker.crawl;
 
 /**
  * Created by kmcfadden on 8/22/17.

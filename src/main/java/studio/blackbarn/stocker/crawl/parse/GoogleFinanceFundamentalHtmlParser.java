@@ -1,12 +1,13 @@
-package studio.blackbarn.stocker;
+package studio.blackbarn.stocker.crawl.parse;
 
+import studio.blackbarn.stocker.StockExchange;
+import studio.blackbarn.stocker.persistence.model.FundamentalsPO;
 import studio.blackbarn.utils.StringUtils;
-import studio.blackbarn.utils.HtmlScraper;
 
 /**
  * Created by kmcfadden on 8/21/17.
  */
-public class GoogleFinanceHtmlParser extends HtmlParser {
+public class GoogleFinanceFundamentalHtmlParser extends FundamentalHtmlParser {
 
     private static final String NO_MATCHES = "produced no matches";
 
@@ -20,7 +21,7 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
     private Double eps;
     private String cap;
 
-    public GoogleFinanceHtmlParser(String html, String tickerSymbol) {
+    public GoogleFinanceFundamentalHtmlParser(String html, String tickerSymbol) {
         this.tickerSymbol = tickerSymbol;
 
         // determine if html is bad
@@ -51,7 +52,9 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
                                   }
                                   continue;
 
-                case "Mkt cap":   cap = val;
+                case "Mkt cap":   if (StringUtils.isFloatingPoint(val.substring(0, val.length() - 1))) {
+                                      cap = val;
+                                  }
                                   continue;
 
                 case "P/E":       if (StringUtils.isFloatingPoint(val)) {
@@ -105,60 +108,20 @@ public class GoogleFinanceHtmlParser extends HtmlParser {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-    // the following methods aren't accurate until parser has been run
     public boolean isValid() {
         return isValid;
     }
 
-    public String getTickerSymbol() {
-        return tickerSymbol;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public Double getDividend() {
-        return dividend;
-    }
-
-    public Double getYield() {
-        return yield;
-    }
-
-    public Double getPe() {
-        return pe;
-    }
-
-    public Double getEps() {
-        return eps;
-    }
-
-    public String getCap() {
-        return cap;
-    }
-
-    public String[] getData() {
-        String tempDiv = (dividend != null) ? Double.toString(dividend) : null;
-        String tempYield = (yield != null) ? Double.toString(yield) : null;
-        String tempPe = (pe != null) ? Double.toString(pe) : null;
-        String tempEps = (eps != null) ? Double.toString(eps) : null;
-        String[] data = { tickerSymbol, Double.toString(price), tempDiv, tempYield, tempPe, tempEps, cap };
-        return data;
-    }
-
-    public static String[] getHeader() {
-        String[] header = { "Symbol", "Price", "Dividend", "Yield", "P/E", "EPS", "Mkt Cap" };
-        return header;
+    public FundamentalsPO getData(StockExchange exchange) {
+        return new FundamentalsPO(tickerSymbol, price, dividend, yield, pe, eps, cap, exchange);
     }
 
     // Testing
 //    public static void main(String[] args) {
-//        GoogleFinanceHtmlParser parser = new GoogleFinanceHtmlParser(HtmlScraper.getHtml("https://www.google.com/finance?q=NYSE:ABCD"), "VZ");
+//        GoogleFinanceFundamentalHtmlParser parser = new GoogleFinanceFundamentalHtmlParser(HtmlScraper.getHtml("https://www.google.com/finance?q=NYSE:ABCD"), "VZ");
 //
 //        if (parser.isValid) {
-//            String[] header = GoogleFinanceHtmlParser.getHeader();
+//            String[] header = GoogleFinanceFundamentalHtmlParser.getHeader();
 //            for (int i = 0; i < header.length; i++)
 //                System.out.print(header[i] + "   ");
 //            System.out.println('\n');

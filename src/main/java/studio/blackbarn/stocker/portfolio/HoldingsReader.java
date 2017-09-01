@@ -1,4 +1,4 @@
-package studio.blackbarn.stocker;
+package studio.blackbarn.stocker.portfolio;
 
 import studio.blackbarn.utils.CsvReader;
 

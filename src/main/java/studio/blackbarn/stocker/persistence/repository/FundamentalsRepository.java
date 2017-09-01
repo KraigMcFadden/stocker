@@ -6,7 +6,7 @@ import studio.blackbarn.stocker.persistence.model.FundamentalsPO;
 /**
  * Created by kmcfadden on 8/30/17.
  */
-public interface FundamentalsRepository extends CrudRepository<FundamentalsPO, Integer> {
+public interface FundamentalsRepository extends CrudRepository<FundamentalsPO, String> {
 
-    FundamentalsPO findByTickerSymbol(String tickerSymbol);
+    FundamentalsPO findByTickerSymbolAndExchange(String tickerSymbol, String exchange);
 }

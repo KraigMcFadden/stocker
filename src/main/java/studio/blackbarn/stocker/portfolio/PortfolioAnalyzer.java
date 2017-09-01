@@ -1,5 +1,9 @@
-package studio.blackbarn.stocker;
+package studio.blackbarn.stocker.portfolio;
 
+import studio.blackbarn.stocker.StockExchange;
+import studio.blackbarn.stocker.Urls;
+import studio.blackbarn.stocker.crawl.parse.GoogleFinanceFundamentalHtmlParser;
+import studio.blackbarn.stocker.persistence.model.FundamentalsPO;
 import studio.blackbarn.utils.HtmlScraper;
 
 import java.util.HashMap;
@@ -36,13 +40,14 @@ public class PortfolioAnalyzer {
         // gather data
         for (String stockTicker : holdings.keySet()) {
 
-            GoogleFinanceHtmlParser parser = new GoogleFinanceHtmlParser(HtmlScraper.getHtml(Urls.GF_NYSE.getUrl() + stockTicker), stockTicker);
+            GoogleFinanceFundamentalHtmlParser parser = new GoogleFinanceFundamentalHtmlParser(HtmlScraper.getHtml(Urls.GF_NYSE.getUrl() + stockTicker), stockTicker);
             if (parser.isValid()) {
-                double weight = holdings.get(stockTicker) * parser.getPrice();
-                portfolioYield += parser.getYield() * weight;
+                FundamentalsPO fundamentals = parser.getData(StockExchange.NYSE);
+                double weight = holdings.get(stockTicker) * fundamentals.getPrice();
+                portfolioYield += fundamentals.getYield() * weight;
                 portfolioValue += weight;
 
-                System.out.println(stockTicker + " - Price: " + parser.getPrice() + " - Yield: " + parser.getYield());
+                System.out.println(stockTicker + " - Price: " + fundamentals.getPrice() + " - Yield: " + fundamentals.getYield());
             }
 
             try {
